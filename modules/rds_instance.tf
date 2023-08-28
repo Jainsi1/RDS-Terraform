@@ -1,4 +1,4 @@
-# This resorce will create a random password for your database
+# This resource will create a random password for your database
 resource "random_password" "password" {
   length           = 8
   special          = false
