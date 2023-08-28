@@ -13,7 +13,10 @@ resource "aws_secretsmanager_secret" "my_secret" {
 
 resource "aws_secretsmanager_secret_version" "my_secret_version" {
   secret_id     = aws_secretsmanager_secret.my_secret.id
-  secret_string = random_password.password.result
+  secret_string = jsonencode({
+    "password": "${random_password.password.result}",
+    "username": "${aws_db_instance.rds_instance.username}"
+  })
 }
 
 #This resource will create RDS Instance.
